@@ -1,11 +1,14 @@
 import numpy as np
-np.set_printoptions(precision=16, floatmode='fixed')
+np.set_printoptions(precision=15, floatmode='fixed')
 def calculate(inputlist:list):
   calculations = {}
+  tmp = []
   try:
     # 1 - Validate de Input array
     wklist = np.array(inputlist)
-    if len(wklist) != 9:
+    # print (len(inputlist))
+    # print ('cantidad elementos', len(inputlist))
+    if len(inputlist) != 9:
         raise ValueError('List must contain nine numbers.') # problema 2 no esta interpretando el raise error, proque?
     # 2 reshape
     mat3x3 = wklist.reshape(3,3)
@@ -25,10 +28,11 @@ def calculate(inputlist:list):
     for m in dmthe.keys():
         tmprs = []
         for i in titer:
+            tmp = []
             concat = ''
             concat = 'mat3x3.' + str(m) + '( axis = ' + str(i) + ')'
-            X = eval(concat)
-            tmprs.append(X) 
+            tmp = eval(concat)
+            tmprs.append(tmp) # problema 1 la precision esta fallando xq?
         dcresult[str(dmthe[m])]=tmprs
     # set the return
     calculations = dcresult
